@@ -1,0 +1,127 @@
+$primary-color:#FFEFE7;
+$secundary-color:#FFDAC6;
+$tertiary-color:#BABD8D;
+$primary-text-color:#7C6A0A;
+$queaternion-color: #FA9500;
+$font-stack: 'DM Sans', sans-serif;
+$paragraph-size: 1.5em;
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: $primary-color;
+    font-family: $font-stack;
+}
+
+nav{
+    width: auto;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    color: $primary-text-color;
+    padding: 15px;
+    align-items: center;
+    p {
+        font-size: $paragraph-size;
+        padding-left: 30px;
+    }
+
+    .icons{
+        display: flex;
+        gap: 15px;
+
+        button{
+            border-style: none;
+            background: none;
+        }
+    }
+}
+
+article{
+    width: auto;
+    color: $primary-text-color;
+    padding-left: 45px;
+    padding-right: 45px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 70px;
+
+    .impact-section{
+        display: flex;
+        flex-direction: column;
+        padding-top: 50px;
+        gap: 25px;
+    }
+
+    h1{
+        font-size: 3em;
+        margin-bottom: 25px;
+    }
+
+    p{
+        font-size: $paragraph-size;
+    }
+
+    button{
+        border-style: none;
+        background-color: $queaternion-color;
+        width: 12vw;
+        padding: 20px;
+        border-radius: 35px;
+        color: white;
+        font-size: 1em;
+    }
+
+    .image-section{
+        img{
+            width: 25vw;
+            border-radius: 20px;
+        }
+    }
+}
+
+section{
+    width: 100%;
+    height: auto;
+    padding: 60px;
+
+    h2{
+        color: $primary-text-color;
+        font-size: 2em;
+    }
+
+    .healthcare{
+        h2{
+            font-weight: 300;
+            padding-bottom: 60px;
+        }
+        .product-card{
+            width: 12vw;
+            height: auto;
+            background-color: $secundary-color;
+            color: $primary-text-color;
+            padding: 20px;
+            border-radius: 8px;
+
+            img{
+                width: 200px;
+                height: 250px;
+                background-image: cover;
+                border-radius: 6px;
+
+            }
+        }
+    }
+}
+
+footer{
+    background-color: $queaternion-color;
+    width: 100%;
+    height: 500px;
+}
+
+  
