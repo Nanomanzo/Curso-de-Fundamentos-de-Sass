@@ -20,6 +20,18 @@ $paragraph-size: 1.5em;
     }
 }
 
+@mixin breakpoint-big {
+    @media (max-width: 1024px) { @content; }
+}
+
+@mixin breakpoint-small {
+    @media (max-width: 800px) { @content; }
+}
+
+@mixin breakpoint-tiny {
+    @media (max-width: 530px) { @content; }
+}
+
 * {
     margin: 0px;
     padding: 0px;
@@ -33,6 +45,9 @@ body{
 
 nav{
     @include flexCenter(row, space-between, center);
+    @include breakpoint-big{
+        padding: 4%;
+    }
     width: auto;
     height: 100px;
     color: $primary-text-color;
@@ -41,6 +56,9 @@ nav{
     p {
         font-size: $paragraph-size;
         padding-left: 30px;
+        @include breakpoint-big{
+            padding-left: 0px;
+        }
     }
 
     .icons{
@@ -58,9 +76,17 @@ article{
     padding-left: 45px;
     padding-right: 45px;
     padding-top: 70px;
+    @include breakpoint-big{
+        padding: 4%;
+    }
 
     .impact-section{
         @include flexCenter(column, space-evenly, flex-start);
+        @include breakpoint-small(){
+            width: 100%;
+            padding-top: 0px;
+        }
+        width: 50%;
         padding-top: 50px;
         gap: 25px;
     }
@@ -77,11 +103,11 @@ article{
     @include buttonStyle;
     button{
         background-color: $quaternary-color;
-        width: 12vw;
         padding: 20px;
         border-radius: 35px;
         color: white;
         font-size: 1em;
+        width: 220px;
         &:hover{
             transform: scale(1.1);
             transition-duration: 0.3s;
@@ -89,9 +115,17 @@ article{
     }
 
     .image-section{
+        @include breakpoint-small(){
+            display: none;
+        }
+        width: 50%;
+        display: flex;
+        justify-content: center;
         img{
-            width: 25vw;
+            max-width: 400px;
+            min-width: 320px;
             border-radius: 20px;
+
         }
     }
 }
@@ -100,14 +134,18 @@ section{
     width: auto;
     height: auto;
     padding: 60px;
+    @include breakpoint-big{
+        padding: 4%;
+    }
 
     h2{
         color: $primary-text-color;
         font-size: 2em;
     }
-
+    
     .healthcare{
         padding-bottom: 60px;
+        padding-top: 40px;
 
         h2{
             font-weight: 300;
@@ -115,17 +153,25 @@ section{
         }
 
         .card-section{
-            @include flexCenter(row, space-evenly, center);
-            width: auto;
-            height: auto;
-            flex-wrap: wrap;
-            column-gap: 200px;
-            row-gap: 80px;
+            @include breakpoint-small(){
+                display: flex;
+                overflow-x: scroll;
+                overscroll-behavior-x: contain;
+                scroll-snap-type: x proximity;
+                gap: 30px;
+            }
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 50px;
         }
 
         .product-card{
-            width: 14vw;
-            height: 50vh;
+            @include breakpoint-small(){
+                max-width: 305px;
+            }
+            max-width: 450px;
+            min-height: 50vh;
             background-color: $secundary-color;
             color: $primary-text-color;
             padding: 20px;
@@ -141,6 +187,10 @@ section{
                     width: 28px;
                     height: 28px;
                     margin-right: -13px;
+                    transition: transform 0.3s;
+                    &:hover{
+                        transform: scale(1.4);
+                    }
                 }
             }
 
@@ -152,11 +202,42 @@ section{
                 align-items: center;
                 
                 img{
-                    width: 12vw;
-                    height: 30vh;
+                    height: 50vh;
+                    max-width: -webkit-fill-available;
                     object-fit: cover;
                     border-radius: 6px;
+                    user-select: none;
+                    @include breakpoint-tiny(){
+                        height: 34vh;
+                    }
     
+                }
+            }
+
+            .product-card--description{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 160px; 
+
+                h3{
+                    padding-top: 20px;
+                    padding-bottom: 12px;
+                }
+    
+                p{
+                    margin-bottom: 12px;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    -webkit-line-clamp: 3;
+                    line-clamp: 3;
+                }
+    
+                span{
+                    padding-top: 10px;
+                    font-weight: 700;
+                    font-size: 30px
                 }
             }
         }
@@ -178,12 +259,25 @@ section{
     }
     .mission-section{
         @include flexCenter(row, space-evenly, center);
+        @include breakpoint-big{
+            flex-direction: column
+        }
+        .earth{
+            @include breakpoint-big{
+                padding-bottom: 30px;
+            }
+        }
         .earth, .innovation{
             width: 30vw;
             display: flex;
             align-items: center;
             gap: 40px;
             color: #E86424;
+            @include breakpoint-big{
+                flex-direction: column;
+                width: auto;
+                gap: inherit;
+            }
             img{
                 object-fit: contain;
             }
@@ -198,12 +292,18 @@ section{
 .gallery{
     h2{
         font-weight: bold;
-        padding-bottom: 60px;
+        padding-bottom: 40px;
     }
     .gallery-images{
         @include flexCenter(row, space-between, center);
+        @include breakpoint-small{
+            flex-direction: column;
+        }
         padding-bottom: 60px;
         img{
+            @include breakpoint-small{
+                width: 85vw;
+            }
             margin-top: 35px;
             width: 28vw;
             height: 45vh;
@@ -227,6 +327,8 @@ section{
         padding-bottom: 50px;
         img{
             width: 100%;
+            object-fit: cover;
+            height: 500px;
         }
     }
     
@@ -251,6 +353,7 @@ footer{
     .social-media{
         @include flexCenter(row, center, center);
         gap: 40px;
+        padding-top: 50px;
     }
 }
 
