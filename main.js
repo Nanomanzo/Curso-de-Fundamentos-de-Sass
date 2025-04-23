@@ -1,48 +1,32 @@
 // Hacer la solicitud a la API
-fetch('https://api.escuelajs.co/api/v1/categories/3/products')
-  .then(response => response.json()) // Parsear la respuesta a JSON
-  .then(data => {
+document.addEventListener("DOMContentLoaded", () => {
+    const productCards = document.querySelectorAll(".product-card");
 
-    for (let i = 0; i < 8 && i < data.length; i++) {
-      const product = data[i];
-      console.log(product);
-      const furnitureContainer = document.querySelector('.furniture');
-      const productCard = furnitureContainer.querySelector(`.product-card:nth-child(${i + 1})`);
+    fetch("https://dummyjson.com/products?limit=10")
+        .then(res => res.json())
+        .then(data => {
+            const products = data.products;
 
-      if (productCard) {
-        productCard.querySelector('.product-title').textContent = product.title;
-        productCard.querySelector('.product-price').textContent = `$${product.price}`;
-        productCard.querySelector('.product-description').textContent = product.description;
-        productCard.querySelector('.product-image img').src = product.images[0];
-      }
-    }
-  })
-  .catch(error => {
-    console.error('Error al obtener los datos:', error);
-  });
+            productCards.forEach((card, index) => {
+                const product = products[index];
 
+                if (!product) return;
 
-  fetch('https://api.escuelajs.co/api/v1/categories/5/products')
-  .then(response => response.json()) // Parsear la respuesta a JSON
-  .then(data => {
+                const image = card.querySelector(".product-image img");
+                const title = card.querySelector(".product-title");
+                const description = card.querySelector(".product-description");
+                const price = card.querySelector(".product-price");
 
-    for (let i = 0; i < 8 && i < data.length; i++) {
-      const product = data[i];
-      console.log(product);
-      const healthcareContainer = document.querySelector('.healthcare');
-      const productCard = healthcareContainer.querySelector(`.product-card:nth-child(${i + 1})`);
+                image.src = product.thumbnail;
+                image.alt = product.title;
+                title.textContent = product.title;
+                description.textContent = product.description;
+                price.textContent = `€${product.price}`;
+            });
+        })
+        .catch(err => console.error("Error al cargar productos:", err));
+});
 
-      if (productCard) {
-        productCard.querySelector('.product-title').textContent = product.title;
-        productCard.querySelector('.product-price').textContent = `$${product.price}`;
-        productCard.querySelector('.product-description').textContent = product.description;
-        productCard.querySelector('.product-image img').src = product.images[0];
-      }
-    }
-  })
-  .catch(error => {
-    console.error('Error al obtener los datos:', error);
-  });
 
 
 // JS actualizado
