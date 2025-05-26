@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const productCards = document.querySelectorAll(".product-card");
 
-    fetch("https://dummyjson.com/products?limit=10")
+    fetch("https://dummyjson.com/products?limit=12")
         .then(res => res.json())
         .then(data => {
             const products = data.products;
